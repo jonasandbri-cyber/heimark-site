@@ -4,8 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0b1416">
+<meta name="color-scheme" content="light dark">
 <title>Heimark · Your home's memory</title>
-<meta name="description" content="Heimark remembers your home for you: every appliance, manual, receipt and service date, with answers when you ask. Try it free for 2 weeks.">
+<meta name="description" content="Heimark remembers your home for you: every appliance, manual, receipt and service date, with answers when you ask. Start free.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Heimark">
 <meta property="og:title" content="Heimark · Your home has a memory.">
@@ -16,10 +17,9 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="apple-itunes-app" content="app-id=6761266068">
 <link rel="icon" type="image/png" href="assets/premise-symbol.png">
 <link rel="apple-touch-icon" href="assets/premise-symbol.png">
-<script>document.documentElement.classList.add('js')</script>
+<script>document.documentElement.classList.add('js');(function(){var t;try{t=localStorage.getItem('heimark-theme')}catch(e){}if(t!=='light'&&t!=='dark')t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.dataset.theme=t})()</script>
 <!--
   Heimark funnel v2. Inspired by pear.no's editorial grammar (big display, quiet UI face, tags,
   rail, one visual world, "Asked before"), built on Heimark's own world: the A-frame and the
@@ -28,16 +28,19 @@
   Every asset is local (assets/); nothing is hotlinked.
 -->
 <link rel="preload" href="assets/night-moon-display.webp" as="image" fetchpriority="high">
-<link rel="stylesheet" href="funnel.css">
-<script src="motion.js"></script>
-<script src="funnel.js" defer></script>
+<link rel="stylesheet" href="funnel.css?v=3">
+<script src="motion.js?v=3"></script>
+<script src="funnel.js?v=3" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 
 <header class="top" id="top">
   <a class="logo" href="#story" aria-label="Heimark, back to the start"><i class="ring" aria-hidden="true"></i><span>heimark</span><b aria-hidden="true"></b></a>
-  <a class="chip-btn" aria-disabled="true"><span>Coming soon</span></a>
+  <div class="top-r">
+    <button class="theme-btn" id="theme-btn" type="button" aria-label="Switch to dark mode"><i class="sun" aria-hidden="true"></i><i class="moon" aria-hidden="true"></i></button>
+    <a class="chip-btn" aria-disabled="true"><span>Coming soon</span></a>
+  </div>
 </header>
 
 <nav class="rail" aria-label="Chapters">
@@ -46,6 +49,7 @@
     <li><a href="#story" data-label="The house"><span class="sr-only">The house</span></a></li>
     <li><a href="#inside" data-label="Inside"><span class="sr-only">Inside</span></a></li>
     <li><a href="#features" data-label="What it does"><span class="sr-only">What it does</span></a></li>
+    <li><a href="#modes" data-label="Light &amp; dark"><span class="sr-only">Light and dark</span></a></li>
     <li><a href="#film" data-label="The film"><span class="sr-only">The film</span></a></li>
     <li><a href="#pricing" data-label="Pricing"><span class="sr-only">Pricing</span></a></li>
     <li><a href="#faq" data-label="Asked before"><span class="sr-only">Asked before</span></a></li>
@@ -138,11 +142,13 @@
               </div>
               <img class="ask-input" src="assets/ask-input.webp" loading="lazy" alt="">
             </div>
-            <img class="scr" data-scr="1" src="assets/listening.webp" loading="lazy" alt="">
-            <img class="scr pad" data-scr="2" src="assets/asset-identified.webp" loading="lazy" alt="">
-            <img class="scr" data-scr="3" src="assets/home-aframe-film.webp" loading="lazy" alt="">
-            <img class="scr" data-scr="4" src="assets/reminders.webp" loading="lazy" alt="">
-            <img class="scr" data-scr="5" src="assets/calendar.webp" loading="lazy" alt="">
+            <img class="scr pad" data-scr="1" src="assets/asset-identified.webp" loading="lazy" alt="">
+            <img class="scr" data-scr="2" src="assets/app-dark-ask-answer.webp" loading="lazy" alt="">
+            <img class="scr" data-scr="3" src="assets/app-light-notes.webp" loading="lazy" alt="">
+            <img class="scr" data-scr="4" src="assets/app-dark-ask-sheet.webp" loading="lazy" alt="">
+            <img class="scr" data-scr="5" src="assets/app-light-today.webp" loading="lazy" alt="">
+            <img class="scr" data-scr="6" src="assets/app-dark-calendar.webp" loading="lazy" alt="">
+            <img class="scr" data-scr="7" src="assets/app-light-report.webp" loading="lazy" alt="">
           </div>
         </figure>
 
@@ -162,40 +168,57 @@
 
     <div class="feat-list">
       <article class="feat" data-feat="0">
-        <p class="tag"><span>01</span>Ask Heimark</p>
-        <h3 class="display">Ask your home <em>anything.</em></h3>
-        <p>"When did we replace the roof?" "What size filter does the furnace take?" Heimark answers from your own records and shows you the receipt, the manual or the task it came from.</p>
+        <p class="tag"><span>01</span>Set up</p>
+        <h3 class="display">Set up in minutes, <em>your way.</em></h3>
+        <p>Pick <b>Easy setup</b> and tick what your home has: furnace, water heater, fridge, and anything else you add. Or <b>Walk your home</b> and snap each label as you go. Either way, Heimark builds the maintenance plan for you.</p>
       </article>
       <article class="feat" data-feat="1">
-        <p class="tag"><span>02</span>Ask Heimark · Voice</p>
-        <h3 class="display">Or just <em>say it.</em></h3>
-        <p>Hands full under the sink? Tap the mic and ask out loud. Heimark listens, then answers like you typed it.</p>
+        <p class="tag"><span>02</span>Ask Heimark</p>
+        <h3 class="display">Ask your home <em>anything.</em></h3>
+        <p>"When did we replace the roof?" "What size filter does the furnace take?" Type it or just say it. Heimark answers from your own records, not the internet.</p>
       </article>
       <article class="feat" data-feat="2">
-        <p class="tag"><span>03</span>Scan with Heimark</p>
-        <h3 class="display">Snap the label. <em>Done.</em></h3>
-        <p>Point your camera at the sticker on the water heater, furnace or fridge. Heimark reads the brand, model and serial, files the appliance, and suggests a maintenance plan you can edit before you save.</p>
+        <p class="tag"><span>03</span>Answers you can tap</p>
+        <h3 class="display">The answer, <em>and the proof.</em></h3>
+        <p>Every answer comes with the record it came from: the appliance, the warranty, the receipt or the plumber who did the work. One tap and you're there. Not sure what to ask? Heimark suggests questions about your home.</p>
       </article>
       <article class="feat" data-feat="3">
-        <p class="tag"><span>04</span>One place</p>
-        <h3 class="display">The whole house, <em>in one place.</em></h3>
-        <p>Assets, Files &amp; Notes, Contacts and Tasks, for the house, the cabin and the rental. Manuals, receipts, warranties, inspection reports and the plumber's number, right where you'll look for them.</p>
+        <p class="tag"><span>04</span>It remembers</p>
+        <h3 class="display">Tell it once. <em>It remembers.</em></h3>
+        <p>"The water shutoff is behind the basement stairs." Save notes like that and Heimark uses them when you ask. Tell it "I changed the filter" and the job is logged with today's date.</p>
       </article>
       <article class="feat" data-feat="4">
         <p class="tag"><span>05</span>Reminders &amp; calendar</p>
         <h3 class="display">It reminds you <em>before it breaks.</em></h3>
-        <p>Set a task once and Heimark keeps the schedule. See what's due today, what's coming up and what's overdue, then snooze it or mark it done. The calendar shows the whole year.</p>
+        <p>Every morning, Today shows what's overdue, what's this week and what Heimark thinks is worth doing next. Snooze it, mark it done, or see the whole year on the calendar.</p>
       </article>
       <article class="feat" data-feat="5">
-        <p class="tag"><span>06</span>Share the house</p>
+        <p class="tag"><span>06</span>Home report</p>
+        <h3 class="display">The whole house, <em>in one PDF.</em></h3>
+        <p>A year in review for your records or your insurer, or a full home history when you sell: every appliance with its age and warranty, every repair, and the papers on file. Share it, save it or print it.</p>
+      </article>
+      <article class="feat" data-feat="6">
+        <p class="tag"><span>07</span>Share the house</p>
         <h3 class="display">Hand it off. <em>Know it's done.</em></h3>
-        <p>Invite a partner, a handyman or a property manager. Assign a task and they're notified; when it's done, so are you. Heimark keeps the history, so nobody has to remember who did what.</p>
+        <p>Share a home with your partner. On Host, bring in the whole team: handymen, co-hosts and managers. Assign a task and they're notified; when it's done, so are you.</p>
       </article>
     </div>
   </div>
 </section>
 
 <!-- ============ 05 · The film -->
+<section class="modes" id="modes" data-tone="dark" aria-labelledby="modes-title">
+  <header class="modes-head">
+    <p class="tag">Light &amp; dark</p>
+    <h2 class="display" id="modes-title">Easy on the eyes, <em>day or night.</em></h2>
+    <p>Heimark follows your iPhone's light or dark setting, or you can pick one in Settings. Same home, same answers, whichever you like.</p>
+  </header>
+  <div class="modes-pair">
+    <figure class="phone mini"><div class="screen"><img src="assets/app-light-today.webp" loading="lazy" alt="Heimark's Today screen in light mode"></div><figcaption>Light</figcaption></figure>
+    <figure class="phone mini"><div class="screen"><img src="assets/app-dark-today.webp" loading="lazy" alt="Heimark's Today screen in dark mode"></div><figcaption>Dark</figcaption></figure>
+  </div>
+</section>
+
 <section class="film" id="film" data-tone="dark" aria-labelledby="film-title">
   <div class="film-head">
     <p class="tag">The film</p>
@@ -211,14 +234,27 @@
 <section class="pricing" id="pricing" data-tone="light" aria-labelledby="pricing-title">
   <div class="price-head">
     <p class="tag">Pricing</p>
-    <h2 class="display" id="pricing-title">Try everything<br><em class="nowrap">free for 2 weeks.</em></h2>
+    <h2 class="display" id="pricing-title">Start free.<br><em class="nowrap">Grow when you need to.</em></h2>
     <div class="bill" role="radiogroup" aria-label="Billing period">
       <span class="bill-ind" aria-hidden="true"></span>
       <button type="button" role="radio" aria-checked="true" data-bill="year">Yearly <small>Save 33%</small></button>
       <button type="button" role="radio" aria-checked="false" data-bill="month">Monthly</button>
     </div>
   </div>
-  <div class="plans">
+  <div class="plans three">
+    <article class="plan">
+      <p class="tag-plain">Free</p>
+      <h3>To get started</h3>
+      <div class="price"><span class="amt">$0</span><span class="per">forever</span></div>
+      <p class="note">No card needed.</p>
+      <ul>
+        <li>1 home</li>
+        <li>5 appliances with their reminders</li>
+        <li>An Easy setup maintenance plan</li>
+        <li>Try a scan and Ask Heimark once</li>
+      </ul>
+      <a class="btn line-dark" aria-disabled="true"><span>Coming soon to the App Store</span></a>
+    </article>
     <article class="plan">
       <p class="tag-plain">Heimark</p>
       <h3>For your home</h3>
@@ -248,7 +284,7 @@
       <a class="btn" aria-disabled="true"><span>Coming soon to the App Store</span></a>
     </article>
   </div>
-  <p class="fine">Or start free: 1 home, 5 appliances and their reminders. Heimark yearly starts with 2 weeks free, then bills through your Apple ID. Cancel anytime in Settings at least a day before the trial ends.</p>
+  <p class="fine">Heimark yearly starts with 2 weeks free, then bills through your Apple ID. Cancel anytime in Settings at least a day before the trial ends.</p>
 </section>
 
 <!-- ============ 06 · Asked before -->
@@ -260,6 +296,7 @@
     </div>
     <div class="qa-list">
       <details><summary>Where do the answers come from?</summary><div class="ans"><p>From your own records: the assets, files, notes and tasks you've saved for that property. Every answer shows where it came from, so you can open the receipt or the manual behind it.</p></div></details>
+      <details><summary>Is my information private?</summary><div class="ans"><p>Yes. Your home records are yours. We don't sell them, show you ads, or use them to train AI. Only the people you share a home with can see it, and you can delete your account and everything in it from the app. <a href="/privacy">Read the privacy policy</a>.</p></div></details>
       <details><summary>I have nothing organized. Where do I start?</summary><div class="ans"><p>Scan one appliance label. Heimark fills in the details and suggests a maintenance plan, and the house starts to fill itself in from there. Add a photo of a receipt or a manual whenever you come across one.</p></div></details>
       <details><summary>Can my family or my handyman use it too?</summary><div class="ans"><p>Yes. Heimark lets you share with one person, like your spouse. Host lets you bring in your whole team: handymen, co-hosts and managers. Assign tasks and everyone gets notified when work is assigned and when it's done.</p></div></details>
       <details><summary>Does it work for more than one property?</summary><div class="ans"><p>Yes. A house, a cabin and a short-term rental each get their own assets, records and tasks, side by side. Heimark covers two; Host covers 3 or 10.</p></div></details>

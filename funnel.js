@@ -149,7 +149,7 @@
   const plates = Object.fromEntries($$('.plate-card').map(el => [el.dataset.plate, { el, f: new Follow(0, 'default') }]));
   const checks = $$('[data-plate="share"] li').map(li => ({ li, f: new Follow(0, 'snappy') }));
   // feature → [screen index, or -1 when an illustration stands in for the phone; plate]
-  const PLAN = [[0], [1], [2], [3], [4], [-1, 'share']];
+  const PLAN = [[1], [0], [2], [3], [5], [7], [-1, 'share']];
   let featActive = -1;
 
   function activate(i) {
@@ -158,10 +158,11 @@
     const [s, plate] = i >= 0 ? PLAN[i] : [0];
     const screenIdx = s < 0 ? (prev >= 0 && PLAN[prev][0] >= 0 ? PLAN[prev][0] : 0) : s;
     scr.forEach((c, j) => { if (j !== 0) c.f.to(j <= screenIdx ? 1 : 0); });
-    if (i === 4) scr[5].f.to(1, { delay: 1.6 });                      // reminders, then the calendar slides over
+    if (i === 3) scr[4].f.to(1, { delay: 1.6 });                      // notes, then the Ask sheet slides over
+    if (i === 4) scr[6].f.to(1, { delay: 1.6 });                      // Today, then the calendar slides over
     phoneOn.to(s < 0 ? 0 : 1);
     for (const [k, p] of Object.entries(plates)) p.f.to(k === plate ? 1 : 0, { delay: k === plate ? 0.12 : 0 });
-    if (i === 0) qa.forEach((c, j) => c.f.to(1, { delay: 0.45 + j * 1.25 }));
+    if (i === 1) qa.forEach((c, j) => c.f.to(1, { delay: 0.45 + j * 1.25 }));
     if (plate === 'share') checks.forEach((c, j) => { c.f.set(0); c.f.to(1, { delay: 0.45 + j * 0.42 }); });
   }
 
@@ -172,6 +173,17 @@
     video.muted = !video.muted; soundBtn.setAttribute('aria-pressed', String(!video.muted));
     soundBtn.querySelector('span').textContent = video.muted ? 'Sound on' : 'Sound off';
     if (!video.muted) { video.currentTime = 0; video.play().catch(() => {}); }
+  });
+
+  // ---------------------------------------------------------------- light / dark
+  const themeBtn = $('#theme-btn');
+  const label = () => themeBtn.setAttribute('aria-label', document.documentElement.dataset.theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+  label();
+  themeBtn.addEventListener('click', () => {
+    const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+    document.documentElement.dataset.theme = next;
+    try { localStorage.setItem('heimark-theme', next); } catch (e) {}
+    label(); kick();
   });
 
   // ---------------------------------------------------------------- pricing: billing toggle
@@ -334,10 +346,10 @@
     let toneLight;
     if (story.top + story.h > probe && story.top <= probe) toneLight = false;
     else {
-      const zones = [inside, { el: featuresEl }, film, { el: $('#pricing') }, { el: $('#faq') }, close];
+      const zones = [inside, { el: featuresEl }, { el: $('#modes') }, film, { el: $('#pricing') }, { el: $('#faq') }, close];
       let under = null;
       for (const z of zones) { const r = z.el.getBoundingClientRect(); if (r.top <= probe && r.bottom > probe) under = z.el; }
-      toneLight = under ? under.dataset.tone === 'light' : false;
+      toneLight = under ? under.dataset.tone === 'light' && document.documentElement.dataset.theme !== 'dark' : false;
     }
     tone.to(toneLight ? 1 : 0);
     const tv = clamp(tone.at(t)), rs = document.documentElement.style;

@@ -236,3 +236,47 @@ html:not(.js) .day-plate{display:none}
   [data-fx],.actions,.film-frame{opacity:1!important;transform:none!important}
 }
 .nowrap{white-space:nowrap}
+
+/* ---------- light / dark (theme set in <head>, toggled by #theme-btn) ---------- */
+.top-r{display:flex;align-items:center;gap:10px}
+.theme-btn{width:40px;height:40px;padding:0;border:0;border-radius:9px;background:transparent;color:var(--tone);box-shadow:inset 0 0 0 1px currentColor;display:grid;place-items:center}
+.theme-btn i{grid-area:1/1;width:18px;height:18px;background:currentColor}
+.theme-btn .sun{display:none;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='4'/%3E%3Cpath d='M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='4'/%3E%3Cpath d='M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4'/%3E%3C/svg%3E") center/contain no-repeat}
+.theme-btn .moon{-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z'/%3E%3C/svg%3E") center/contain no-repeat}
+:root[data-theme="dark"] .theme-btn .sun{display:block}
+:root[data-theme="dark"] .theme-btn .moon{display:none}
+a[aria-disabled="true"]{cursor:default}
+
+/* the light sections take a warm espresso palette in dark mode; dark sections stay as they are */
+:root[data-theme="dark"] :is(.features,.pricing,.faq){--cream:#15110e;--paper:#1c1714;--ink:#f3ede3;--ink-2:#b8a690;--line:#f3ede31f;color:var(--ink)}
+:root[data-theme="dark"] :is(.plan,.plate-card){background:#262019;box-shadow:0 0 0 1px #f3ede31a}
+:root[data-theme="dark"] .plan.featured{background:var(--night);box-shadow:0 0 0 1px #ad7b4366,0 40px 90px #00000066}
+:root[data-theme="dark"] :is(.plan li,.plate-card li){border-color:#f3ede31a}
+:root[data-theme="dark"] .bill{background:#f3ede314}
+:root[data-theme="dark"] .bill-ind{background:#3a3129;box-shadow:none}
+:root[data-theme="dark"] :is(.pricing,.faq) .btn{color:#2b2620}
+:root[data-theme="dark"] .pricing .btn.dark{background:var(--bone)}
+:root[data-theme="dark"] .phone{box-shadow:0 50px 90px #00000080,0 0 0 1px #f3ede31f}
+.btn.line-dark{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1px var(--line)}
+:root[data-theme="dark"] .pricing .btn.line-dark{color:var(--ink)}
+
+/* three plans */
+.plans.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media (max-width:1000px){ .plans.three{grid-template-columns:1fr;max-width:560px} }
+
+/* ---------- light & dark showcase ---------- */
+.modes{position:relative;z-index:5;background:var(--night);color:var(--bone);padding:20svh var(--gutter) 18svh;overflow:hidden}
+.modes-head{max-width:880px}
+.modes-head .tag{color:var(--accent-lt)}
+.modes-head p:not(.tag){margin:28px 0 0;max-width:34em;font-size:18px;line-height:1.62;color:#fff8ebb3}
+.modes-pair{display:flex;justify-content:center;gap:clamp(16px,5vw,72px);margin-top:9svh}
+.phone.mini{height:auto;width:min(320px,40vw);aspect-ratio:1206/2622;padding:8px;border-radius:46px;box-shadow:0 50px 90px #00000080,0 0 0 1px #fff8eb1f}
+.phone.mini .screen{border-radius:38px}
+.phone.mini img{width:100%;height:100%;object-fit:cover;object-position:top}
+.phone.mini figcaption{position:absolute;left:0;right:0;bottom:-44px;text-align:center;font:500 11px/1 var(--ui);letter-spacing:.2em;text-transform:uppercase;color:#fff8eb99}
+.modes-pair .phone.mini:last-child{transform:translateY(7%)}
+@media (max-width:760px){
+  .modes{padding:14svh 16px 16svh}
+  .phone.mini{border-radius:28px;padding:5px}
+  .phone.mini .screen{border-radius:23px}
+}
