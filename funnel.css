@@ -280,3 +280,7 @@ a[aria-disabled="true"]{cursor:default}
   .phone.mini{border-radius:28px;padding:5px}
   .phone.mini .screen{border-radius:23px}
 }
+
+/* Accessible gold on the light sections (WCAG AA 4.5:1 on paper). Dark
+   theme and the night sections keep the brighter gold, which already passes. */
+:root:not([data-theme="dark"]) :is(.features,.pricing,.faq){--accent:#865a2b}

@@ -2,7 +2,7 @@
 @font-face{font-family:'AppUI';src:url(/assets/poppins-500.woff2) format('woff2');font-weight:500;font-display:swap}
 @font-face{font-family:'AppUI';src:url(/assets/poppins-600.woff2) format('woff2');font-weight:600;font-display:swap}
 :root{
-  --cream:#f3ede3; --bone:#fff8eb; --ink:#2b2620; --ink-2:#6c5a47; --line:#2b262022; --accent:#ad7b43;
+  --cream:#f3ede3; --bone:#fff8eb; --ink:#2b2620; --ink-2:#6c5a47; --line:#2b262022; --accent:#865a2b;
   --display:"Helvetica Neue",Helvetica,Arial,sans-serif; --ui:'AppUI',system-ui,sans-serif;
 }
 *{box-sizing:border-box}
