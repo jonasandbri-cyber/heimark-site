@@ -286,7 +286,6 @@ let lastY = scrollY;
 addEventListener('scroll', () => { const y = scrollY; if (Math.abs(y - lastY) > 6) { bF.to(y < 120 || y < lastY ? 1 : 0); lastY = y; } }, { passive: true });
 onFrame(t => { const v = clamp(Math.max(bF.at(t), mF.at(t)), 0, 1.1); buy.style.height = (34 * v).toFixed(1) + 'px'; buy.style.marginBottom = (6 * clamp(v)).toFixed(1) + 'px'; buy.style.opacity = clamp(v * 2 - 1).toFixed(3); });
 
-
 // ---------- hero: four options, picked with ?hero=1..4 ----------
 const HERO = (new URLSearchParams(location.search).get('hero') || '3');
 document.body.dataset.hero = HERO;
@@ -476,10 +475,10 @@ onFrame(t => askEls.forEach(a => { const v = a.f.at(t); a.e.style.transform = `t
 const QA = [
   ['What is Heimark?', 'A memory for the places you host. It keeps every appliance, fix and reminder for each rental in one calm app.'],
   ['Which platforms is Heimark on?', 'iPhone first, in light and dark mode. It’s coming soon to the App Store.'],
-  ['How much does Heimark cost?', 'Free for your first rental. Heimark is $39.99 a year, and Host plans cover more places.'],
+  ['How much does Heimark cost?', 'Free for your first rental, with up to 5 appliances. Heimark is $39.99 a year or $4.99 a month for 2 rentals. Host covers 3 or 10. New subscribers get 2 weeks free.'],
   ['How long does setup take?', 'One walk through the rental. Snap the sticker on each appliance and Heimark reads it while you keep going.'],
   ['Does it connect to Airbnb?', 'Not yet. Heimark keeps the house side of hosting: what’s in it and what it needs.'],
-  ['Can my co-host and handyman use it?', 'Yes. Invite them to a rental and they see its appliances and jobs. You can hand a job straight to them.'],
+  ['Can my co-host and handyman use it?', 'Yes. On Host, invite your whole team and hand a job straight to them. On Heimark, you can share each rental with one person.'],
   ['What is Ask Heimark?', 'Ask anything about a rental, or just tell it what you did. It answers from your own records and logs jobs for you.'],
   ['What if a guest breaks something?', 'Snap a photo and log it in one line. The fix, the receipt and who did it stay with that appliance for next time.'],
 ];
