@@ -43,7 +43,7 @@ h2 span,.mut{color:var(--soft)}
 .bar .t button{background:none;border:0;cursor:pointer;color:#f6f3ee99;font-size:16px;line-height:1}
 .bar .menu{height:0;overflow:hidden}
 .bar .menu a{display:block;padding:9px 14px;font-size:13px;border-top:1px solid #f6f3ee14}
-.bar .buy{display:flex;justify-content:space-between;align-items:center;margin:0 6px 6px;height:34px;padding:0 10px;border-radius:11px;background:var(--accent);font-size:12px}
+.bar .buy{overflow:hidden;display:flex;justify-content:space-between;align-items:center;margin:0 6px 6px;height:34px;padding:0 10px;border-radius:11px;background:var(--accent);font-size:12px}
 
 /* hero */
 .hero{position:relative;padding:clamp(120px,22svh,200px) 16px 0;isolation:isolate;overflow:hidden}
@@ -84,7 +84,7 @@ body[data-hero="3"] .hbg{border-radius:0 0 32px 32px;overflow:hidden}
 .giant i{display:inline-block;align-self:flex-end;width:.14em;height:.14em;margin:0 0 .02em .03em;background:var(--sun)}
 
 /* the story: phone stays put, lines step past */
-#story{position:relative;height:720svh;margin-top:-1px}
+#story{position:relative;height:840svh;margin-top:-1px}
 .stage{position:sticky;top:0;height:100svh;padding:var(--g)}
 .panel{position:relative;height:100%;border-radius:28px;background:radial-gradient(90% 70% at 50% 45%,#f6efe3 0%,#ece5d9 55%,#e4dacb 100%);box-shadow:0 0 0 1px #2b21190a inset;overflow:hidden}
 .phone{position:absolute;left:50%;top:50%;width:var(--pw);translate:-50% -50%;border-radius:calc(var(--pw) * .168);padding:calc(var(--pw) * .024);background:#0f0c0a;box-shadow:0 0 0 1.5px #8a7a6c inset,0 0 0 calc(var(--pw) * .008) #2a221c,0 2px 3px #0004,0 50px 90px #2b211938}
@@ -156,7 +156,7 @@ body[data-hero="3"] .hbg{border-radius:0 0 32px 32px;overflow:hidden}
 @media (max-width:760px){
   .saves{grid-template-columns:1fr}
   .trio .phone{--pw:34vw}.trio .mid{--pw:44vw}
-  #story{height:560svh}
+  #story{height:650svh}
   .lines{width:auto;left:20px!important;right:20px!important;top:auto;translate:none}
   .lines.l{bottom:22px}.lines.r{top:104px}
   .lines.r .ln{text-align:center}
@@ -173,7 +173,7 @@ body[data-hero="3"] .hbg{border-radius:0 0 32px 32px;overflow:hidden}
 <div class="bar" id="bar">
   <div class="t"><span>heimark<i></i></span><button id="mbtn" aria-label="Menu" aria-expanded="false">⋯</button></div>
   <div class="menu" id="menu"><a href="#story">How it works</a><a href="#faq">FAQ</a><a href="/privacy">Privacy</a><a href="/support">Support</a></div>
-  <a class="buy" href="#end"><span>Get Heimark</span><span>Free →</span></a>
+  <a class="buy" href="#end"><span>Get Heimark</span></a>
 </div>
 
 <section class="hero c" id="hero">
@@ -280,6 +280,12 @@ const menu = $('#menu'), mF = new Follow(0, 'snappy');
 let mOpen = false;
 $('#mbtn').onclick = () => { mOpen = !mOpen; mF.to(mOpen ? 1 : 0); $('#mbtn').setAttribute('aria-expanded', mOpen); };
 onFrame(t => menu.style.height = (mF.at(t) * menu.scrollHeight).toFixed(1) + 'px');
+// the Get Heimark row tucks away while you scroll down, comes back when you scroll up
+const buy = $('.bar .buy'), bF = new Follow(1, 'snappy');
+let lastY = scrollY;
+addEventListener('scroll', () => { const y = scrollY; if (Math.abs(y - lastY) > 6) { bF.to(y < 120 || y < lastY ? 1 : 0); lastY = y; } }, { passive: true });
+onFrame(t => { const v = clamp(Math.max(bF.at(t), mF.at(t)), 0, 1.1); buy.style.height = (34 * v).toFixed(1) + 'px'; buy.style.marginBottom = (6 * clamp(v)).toFixed(1) + 'px'; buy.style.opacity = clamp(v * 2 - 1).toFixed(3); });
+
 
 // ---------- hero: four options, picked with ?hero=1..4 ----------
 const HERO = (new URLSearchParams(location.search).get('hero') || '3');
@@ -361,6 +367,7 @@ giant($('#g1')); giant($('#g2'));
 
 // ---------- story ----------
 const STEPS = [
+  ['Every rental you host, all in one place. Each one keeps its own appliances, jobs and history.', 'All your rentals.<br>One calm place.', 'assets/site/properties.jpg'],
   ['Add a rental and pick Walk your home. Heimark sets the whole place up as you go.', 'Set up in<br>one walk.', 'assets/site/setup.jpg'],
   ['Room by room, snap the sticker on each appliance. Heimark reads it while you keep walking.', 'Snap the sticker.<br>Keep walking.', 'assets/site/walk.jpg'],
   ['Every appliance lands in its rental with its jobs planned. Nothing to type, nothing to remember.', 'It remembers,<br>so you don’t.', 'assets/site/appliances.jpg'],
