@@ -1,0 +1,13 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["7X8J2A33P3.com.heimark.lab", "C46A2H7N8A.app.heimark.ios"],
+        "components": [
+          { "/": "/join", "comment": "Invite links: /join/?code=ABC123" },
+          { "/": "/join/*" }
+        ]
+      }
+    ]
+  }
+}

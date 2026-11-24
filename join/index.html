@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>You're invited · Heimark</title>
+<meta name="description" content="Someone shared a home with you on Heimark.">
+<meta name="robots" content="noindex">
+<meta property="og:title" content="You're invited to a home on Heimark">
+<meta property="og:description" content="Tap to join. Everything about the home, in one place.">
+<meta property="og:image" content="https://heimark.app/assets/premise-symbol.png">
+<link rel="icon" type="image/png" href="/assets/premise-symbol.png">
+<link rel="stylesheet" href="/legal.css?v=2">
+<style>
+.code{font-family:ui-monospace,Menlo,monospace;font-size:40px;font-weight:700;letter-spacing:.18em;margin:8px 0 4px}
+.btn{display:block;text-align:center;background:var(--ink);color:var(--bone);text-decoration:none;font-weight:500;border-radius:999px;padding:15px 20px;margin:12px 0 0}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.small{color:var(--ink-2);font-size:14px}
+</style>
+</head>
+<body>
+<header><a class="logo" href="/">heimark</a></header>
+<main>
+<h1>You're invited to a home.</h1>
+<p class="meta">Someone wants to keep a home on Heimark with you: its appliances, tasks, files and contacts.</p>
+
+<div class="summary" id="has-code" hidden>
+  <p>Your invite code</p>
+  <div class="code" id="code"></div>
+  <a class="btn" id="open">Open in Heimark</a>
+  <a class="btn ghost" href="https://apps.apple.com/us/app/heimark/id6835237127">Get Heimark</a>
+  <p class="small" style="margin-top:14px">New to Heimark? Get the app, sign in, then tap your invite link again and it opens right to Join. Or go to Profile → Team &amp; Access → Join with a Code.</p>
+  <p class="small"><a id="open-lab">Testing Heimark Lab? Open it there.</a></p>
+</div>
+
+<div class="summary" id="no-code" hidden>
+  <p>This link is missing its code.</p>
+  <p class="small">Ask the person who invited you to send it again.</p>
+</div>
+</main>
+<script>
+var c = (new URLSearchParams(location.search).get('code') || '').trim().toUpperCase();
+if (/^[A-Z0-9]{6}$/.test(c)) {
+  document.getElementById('code').textContent = c;
+  document.getElementById('open').href = 'heimark://join?code=' + c;
+  document.getElementById('open-lab').href = 'heimarklab://join?code=' + c;
+  document.getElementById('has-code').hidden = false;
+} else {
+  document.getElementById('no-code').hidden = false;
+}
+</script>
+</body>
+</html>
